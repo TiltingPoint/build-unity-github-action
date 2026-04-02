@@ -24,6 +24,7 @@ async function run() {
         let buildMethod = core.getInput('build-method');
         let runTests = core.getInput('run-tests');
         const buildMethodArgs = core.getInput('build-method-args');
+        const noGraphics = core.getInput('no-graphics') !== 'false';
 
         if (!runTests) {
             if (!buildMethod) {
@@ -71,9 +72,11 @@ async function run() {
             if (buildOptions) {
                 buildArgs += ` -buildOptions "${buildOptions}"`;
             }
-            await exec.exec(`${unityCmd} -batchmode -nographics -quit -logFile "-" ${buildArgs}`);
+            const graphicsFlag = noGraphics ? '-nographics' : '';
+            await exec.exec(`${unityCmd} -batchmode ${graphicsFlag} -quit -logFile "-" ${buildArgs}`);
         } else {
-            await exec.exec(`${unityCmd} -runTests -batchmode -nographics ${buildArgs}`);
+            const testGraphicsFlag = noGraphics ? '-nographics' : '';
+            await exec.exec(`${unityCmd} -runTests -batchmode ${testGraphicsFlag} ${buildArgs}`);
         }
 
         core.setOutput('build-path', buildPath);

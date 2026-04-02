@@ -50,6 +50,10 @@ inputs:
   build-method-args:
     description: Custom arguments for build method
     required: false
+  no-graphics:
+    description: Run Unity with -nographics flag. Set to false for builds that need GPU shader compilation (e.g. URP Render Graph). Default true for backward compatibility.
+    required: false
+    default: 'true'
   run-tests:
     description: Run tests. Ignores 'build-method', but uses 'build-method-args'.
     required: false
