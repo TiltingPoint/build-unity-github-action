@@ -54,6 +54,10 @@ inputs:
     description: Run Unity with -nographics flag. Set to false for builds that need GPU shader compilation (e.g. URP Render Graph). Default true for backward compatibility.
     required: false
     default: 'true'
+  no-batch-mode:
+    description: Run Unity WITHOUT -batchmode flag. Set to true for builds where batchmode breaks rendering (e.g. URP Metal shader pipeline). Default false for backward compatibility.
+    required: false
+    default: 'false'
   run-tests:
     description: Run tests. Ignores 'build-method', but uses 'build-method-args'.
     required: false
