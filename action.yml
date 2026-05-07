@@ -58,6 +58,10 @@ inputs:
     description: Run Unity WITHOUT -batchmode flag. Set to true for builds where batchmode breaks rendering (e.g. URP Metal shader pipeline). Default false for backward compatibility.
     required: false
     default: 'false'
+  unity-quit:
+    description: Run Unity with -quit flag, which exits the editor automatically after the build/executeMethod finishes. Set to false if your build script handles quitting itself (e.g. via EditorApplication.Exit) or when you need Unity to stay open after the run. Default true for backward compatibility.
+    required: false
+    default: 'true'
   run-tests:
     description: Run tests. Ignores 'build-method', but uses 'build-method-args'.
     required: false
