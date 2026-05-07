@@ -26,6 +26,7 @@ async function run() {
         const buildMethodArgs = core.getInput('build-method-args');
         const noGraphics = core.getInput('no-graphics') !== 'false';
         const noBatchMode = core.getInput('no-batch-mode') === 'true';
+        const unityQuit = core.getInput('unity-quit') === 'true';
 
         if (!runTests) {
             if (!buildMethod) {
@@ -75,7 +76,8 @@ async function run() {
             }
             const graphicsFlag = noGraphics ? '-nographics' : '';
             const batchFlag = noBatchMode ? '' : '-batchmode';
-            await exec.exec(`${unityCmd} ${batchFlag} ${graphicsFlag} -quit -logFile "-" ${buildArgs}`);
+            const unityQuitFlag = unityQuit ? '-quit' : '';
+            await exec.exec(`${unityCmd} ${batchFlag} ${graphicsFlag} ${unityQuitFlag} -logFile "-" ${buildArgs}`);
         } else {
             const testGraphicsFlag = noGraphics ? '-nographics' : '';
             await exec.exec(`${unityCmd} -runTests -batchmode ${testGraphicsFlag} ${buildArgs}`);
